@@ -13,9 +13,9 @@ namespace {
 
     std::string FormatDecoratorsChain(StringRef UndecoratedName, const std::vector<StringRef>& Decorators)
     {
-        auto Res = fmt::format("{0}({1})", Decorators.back(), UndecoratedName);
+        auto Res = fmt::format("{0}({1})", Decorators.front(), UndecoratedName);
 
-        for (int i = Decorators.size() - 2; i >= 0; --i) {
+        for (int i = 1; i < Decorators.size(); ++i) {
             Res = fmt::format("{0}({1})", Decorators[i], Res);
         }
         return Res;
@@ -24,7 +24,7 @@ namespace {
     std::string createDecoratorCode(StringRef UndecoratedName, StringRef DecoratedName, const std::vector<StringRef>& Decorators)
     {
         /// TODO: remove constinit if not supported
-        return fmt::format(" static constinit auto {0} = {1};", DecoratedName, FormatDecoratorsChain(UndecoratedName, Decorators));
+        return fmt::format(" constinit auto {0} = {1};", DecoratedName, FormatDecoratorsChain(UndecoratedName, Decorators));
     }
 }
 

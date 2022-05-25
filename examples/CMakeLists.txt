@@ -11,5 +11,4 @@ add_executable(example-repeat Repeat.cpp)
 add_executable(example-errors Errors.cpp)
 add_executable(example-cached Cached.cpp)
 add_executable(example-count-repeat CountAndRepeat.cpp)
-
-
+add_executable(example-measure MeasureTime.cpp)
